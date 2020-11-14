@@ -31,7 +31,7 @@
             TOTAL:
           </th>
           <th>
-            <%= humanized_money_with_symbol cart_subtotal_cents / 100.0 %>
+            <%= humanized_money_with_symbol @items.map {|entry| entry[:product].price_cents * entry[:quantity]}.sum / 100.0 %>
           </th>
         </tr>
       </tfoot>
