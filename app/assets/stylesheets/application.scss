@@ -29,7 +29,9 @@ nav {
   }
 }
 
-@media (min-width: 768px){
+// @media (min-width: 768px){
+  
+  @media (max-width: 990px){
   .container {
       width: auto;
   }
