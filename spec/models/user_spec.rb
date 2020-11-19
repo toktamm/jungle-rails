@@ -78,7 +78,7 @@ RSpec.describe User, type: :model do
       @user1 = User.create(
         first_name: "Toktam",
         last_name: "Mohebbi",
-        email: "example@domain.com",
+        email: "EXAMPLe@DOMAIN.CoM",
         password: "123",
         password_confirmation: "123"
       )
@@ -101,6 +101,57 @@ RSpec.describe User, type: :model do
 
   describe '.authenticate_with_credentials' do
     # examples for this class method here
+
+    it "should authenticate a visitor if credentials match an user information" do
+      @user = User.create(
+        first_name: "Toktam",
+        last_name: "Mohebbi",
+        email: "example@domain.com",
+        password: "123",
+        password_confirmation: "123"
+      )
+      user = User.authenticate_with_credentials("example@domain.com","123")
+      expect(user).to eq(@user)
+    end
+
+    it "should return nil if visitor credentials do not match an user information" do
+      @user = User.create(
+        first_name: "Toktam",
+        last_name: "Mohebbi",
+        email: "example@domain.com",
+        password: "123",
+        password_confirmation: "123"
+      )
+      user = User.authenticate_with_credentials("example@domain.com","test")
+      expect(user).to be nil
+      user2 = User.authenticate_with_credentials("example@domain","123")
+      expect(user2).to be nil
+    end
+
+    # it "should authenticate if visitor types in a few spaces before and/or after the email address" do
+    #   @user = User.create(
+    #     first_name: "Toktam",
+    #     last_name: "Mohebbi",
+    #     email: "example@domain.com",
+    #     password: "123",
+    #     password_confirmation: "123"
+    #   )
+    #   user = User.authenticate_with_credentials(" example@domain.com ","123")
+    #   p @user.inspect
+    # end
+
+    # it "should authenticate if visitor types in the wrong case for email address" do
+    #   @user = User.create(
+    #     first_name: "Toktam",
+    #     last_name: "Mohebbi",
+    #     email: "eXample@domain.COM",
+    #     password: "123",
+    #     password_confirmation: "123"
+    #   )
+    #   user = User.authenticate_with_credentials("EXAMPLe@DOMAIN.CoM","123")
+    #   p @user.inspect
+    # end
+
   end
 
 end
