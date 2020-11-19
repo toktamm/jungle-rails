@@ -128,33 +128,32 @@ RSpec.describe User, type: :model do
       expect(user2).to be nil
     end
 
-    # it "should authenticate if visitor types in a few spaces before and/or after the email address" do
-    #   @user = User.create(
-    #     first_name: "Toktam",
-    #     last_name: "Mohebbi",
-    #     email: "example@domain.com",
-    #     password: "123",
-    #     password_confirmation: "123"
-    #   )
-    #   user = User.authenticate_with_credentials(" example@domain.com ","123")
-    #   p @user.inspect
-    # end
+    it "should authenticate if visitor types in a few spaces before and/or after the email address" do
+      @user = User.create(
+        first_name: "Toktam",
+        last_name: "Mohebbi",
+        email: "example@domain.com",
+        password: "123",
+        password_confirmation: "123"
+      )
+      user = User.authenticate_with_credentials(" example@domain.com ","123")
+      expect(user).to eq(@user)
+    end
 
-    # it "should authenticate if visitor types in the wrong case for email address" do
-    #   @user = User.create(
-    #     first_name: "Toktam",
-    #     last_name: "Mohebbi",
-    #     email: "eXample@domain.COM",
-    #     password: "123",
-    #     password_confirmation: "123"
-    #   )
-    #   user = User.authenticate_with_credentials("EXAMPLe@DOMAIN.CoM","123")
-    #   p @user.inspect
-    # end
+    it "should authenticate if visitor types in the wrong case for email address" do
+      @user = User.create(
+        first_name: "Toktam",
+        last_name: "Mohebbi",
+        email: "eXample@domain.COM",
+        password: "123",
+        password_confirmation: "123"
+      )
+      user = User.authenticate_with_credentials("EXAMPLe@DOMAIN.CoM","123")
+      expect(user).to eq(@user)
+    end
 
   end
 
 end
 
-# email uniqueness checks with current database. It does not create a uniqueness constraint in the database, so it may happen that two different database connections create two records with the same value for a column that you intend to be unique. To avoid that, you must create a unique index on both columns in your database. 
 
