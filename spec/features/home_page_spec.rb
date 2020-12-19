@@ -24,6 +24,7 @@ RSpec.feature "Visitor navigates to home page", type: :feature, js: true do
     # DEBUG
     # commented out b/c it's for debugging only
     # save_and_open_screenshot
+    save_screenshot
 
     # VERIFY
     expect(page).to have_css 'article.product', count: 10
